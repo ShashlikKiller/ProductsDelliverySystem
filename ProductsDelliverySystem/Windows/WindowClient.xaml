@@ -1,0 +1,36 @@
+﻿<Window x:Class="ProductsDelliverySystem.WindowClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProductsDelliverySystem" d:DataContext="{d:DesignInstance Type=local:ClientViewModel}"
+        mc:Ignorable="d"
+        Title="WindowClient" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Label Name="LabelCategory" Content="Выберите категорию товара:" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Name="LabelDestination" Content="Выберите место назначения:" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Name="LabelTransportSelection" Content="Выберите вид транспорта:" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Name="LabelSendOrder" Content="Отправить заказ:" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <ListBox BorderBrush="Black" SelectedItem="{Binding CategoryName}" ItemsSource="{Binding CategoryNames}"  Name="ListBoxCategory" Grid.Column="1" VerticalAlignment="Top" Grid.Row="1"/>
+        <ListBox BorderBrush="Black" SelectedItem="{Binding DestinationName}" ItemsSource="{Binding DestinationNames}" Name="ListBoxDestination" Grid.Column="3" VerticalAlignment="Top" Grid.Row="1"/>
+        <ListBox BorderBrush="Black" SelectedItem="{Binding TransportName}" ItemsSource="{Binding TransportNames}" Name="ListBoxTransportSelection" Grid.Column="5" VerticalAlignment="Top" Grid.Row="1"/>
+        <Button Background="Black" Content="Оформить заказ" Command="{Binding SendOrder}" BorderBrush="Black" Foreground="White" Name ="ButtonSendOrder" Grid.Column="7" VerticalAlignment="Top" Grid.Row="1" />
+        <Button Name="ButtonOpenReadyOrdersWindow" Click="OpenReadyOrdersWindow" Content="Просмотреть список готовых к отправке заказов" FontSize="23" BorderBrush="Black" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="8" Grid.RowSpan="2"/>
+    </Grid>
+</Window>

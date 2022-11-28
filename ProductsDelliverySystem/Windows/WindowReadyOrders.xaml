@@ -1,0 +1,57 @@
+﻿<Window x:Class="ProductsDelliverySystem.WindowReadyOrders"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProductsDelliverySystem" d:DataContext="{d:DesignInstance Type=local:WindowReadyOrdersViewModel}"
+        mc:Ignorable="d"
+        Title="WindowReadyOrders" Height="450" Width="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ListBox ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="1" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding OrderNumber}" FontSize="16" FontWeight="DemiBold" TextAlignment="Left"/>
+                        <!--<TextBlock Text="{Binding OrderCategory.Name}"/>
+                        <TextBlock Text="{Binding OrderDestination.Name}"/>-->
+                        <TextBlock Text="{Binding ReadyToSend}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock Text="Список заказов" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+        <Button Name="buttonLoad" Command="{Binding LoadReadyOrders}" Content="Загрузить список" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="1" Margin="54.6,0,54.8,0" Click="buttonLoad_Click"/>
+        <TextBlock Text="Сведения о заказе" Grid.Row="0" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel DataContext="{Binding SelectedOrder}" Grid.Column="3" Grid.Row="1">
+            <DockPanel>
+                <TextBlock Text="Номер заказа: "/>
+                <TextBlock Text="{Binding OrderNumber}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Категория заказа: "/>
+                <TextBlock Text="{Binding OrderCategory.Name}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Место назначения: "/>
+                <TextBlock Text="{Binding OrderDestination.Name}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Цена доставки: "/>
+                <TextBlock Text="{Binding Price}"/>
+            </DockPanel>
+        </StackPanel>
+        <Button Content="Получить выписку" Command="{Binding MakeChecks}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="3" Grid.Row="2"/>
+    </Grid>
+</Window>

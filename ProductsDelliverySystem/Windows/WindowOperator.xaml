@@ -1,0 +1,70 @@
+﻿<Window x:Class="ProductsDelliverySystem.WindowOperator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProductsDelliverySystem" d:DataContext="{d:DesignInstance Type=local:OperatorViewModel}"
+        mc:Ignorable="d"
+        Title="WindowOperator" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="1" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding OrderNumber}" FontSize="16" FontWeight="DemiBold" TextAlignment="Left"/>
+                        <!--<TextBlock Text="{Binding Category }"/> Если надо выводить еще и категорию
+                        <TextBlock Text="{Binding Destination}" Ну и если место доставки тоже надо/>-->
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock Text="Сведения о заказе" Grid.Row="0" Grid.Column="5" TextAlignment="Center" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Взаимодействие с заказом" Grid.Row="0" Grid.Column="3" TextAlignment="Center" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Список заказов" Grid.Row="0" Grid.Column="1" TextAlignment="Center" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel DataContext="{Binding SelectedOrder}" Grid.Column="5" Grid.Row="1">
+            <DockPanel>
+                <TextBlock Text="Номер: " FontSize="25"/>
+                <TextBlock Text="{Binding OrderNumber}" FontSize="25"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Категория: " FontSize="20"/>
+                <TextBlock Text="{Binding OrderCategory.Name}" FontSize="20"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Место назначения: " FontSize="20"/>
+                <TextBlock Text="{Binding OrderDestination.Name}" FontSize="20"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Выбранный транспорт: " FontSize="20"/>
+                <TextBlock Text="{Binding OrderTransport.Name}" FontSize="20"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Готовность: " FontSize="20"/>
+                <TextBlock Text="{Binding ReadyToSend}" FontSize="20"/>
+            </DockPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="3">
+            <Button FontSize="20" Name="ButtonRefreshOrders" Command="{Binding RefreshOrders}" Content="Загрузить список" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ButtonRefreshOrders_Click_1"/>
+            <TextBlock Text="Выберите место отправки заказа:" FontSize="16" HorizontalAlignment="Center"/>
+            <ListBox FontSize="16" Name="ListBoxPlaceOfDeparture" ItemsSource="{Binding PlacesNames}" SelectedItem="{Binding OrderVariableName}"/>
+            <DockPanel>
+                <TextBlock Text="Сделать заказ готовым: " FontSize="20"/>
+                <CheckBox Command="{Binding MakeThisOrderReady}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</Window>
